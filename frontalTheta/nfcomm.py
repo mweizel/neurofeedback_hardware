@@ -1,7 +1,7 @@
 import socket
 import re
 import numpy as np
-from pylsl import StreamInlet, resolve_stream
+from pylsl import StreamInlet, resolve_byprop
 
 class udpfeedback:
 
@@ -50,7 +50,7 @@ class lslreader:
     def connect(self):
         # Find and resolve EEG stream
         print("Looking for an EEG stream...")
-        streams = resolve_stream('type', 'EEG')
+        streams = resolve_byprop('type', 'EEG')
         if not streams:
             print("No EEG stream found.")
             return -1

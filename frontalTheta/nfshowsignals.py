@@ -1,7 +1,7 @@
 import numpy as np
 import pygame
 import nfcomm, nfdata, nfprocess
-from pylsl import StreamInlet, resolve_stream, TimeoutError
+
 
 # Initialize Pygame
 pygame.init()
