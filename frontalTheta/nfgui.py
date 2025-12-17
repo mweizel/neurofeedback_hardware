@@ -54,16 +54,18 @@ class NeurofeedbackGUI:
         status_bar.grid(row=4, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=10)
 
     def start_signal_display(self):
+        script_dir = os.path.dirname(os.path.abspath(__file__))
         try:
-            subprocess.Popen([sys.executable, "generateThetaSignal.py"])  # Start signal generator first
-            subprocess.Popen([sys.executable, "nfshowsignals.py"])
+            subprocess.Popen([sys.executable, os.path.join(script_dir, "generateThetaSignal-2.py")]) 
+            subprocess.Popen([sys.executable, os.path.join(script_dir, "nfshowsignals.py")])
             self.status_var.set("Signal display and generator started")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to start signal display: {str(e)}")
 
     def start_square_display(self):
+        script_dir = os.path.dirname(os.path.abspath(__file__))
         try:
-            subprocess.Popen([sys.executable, "nfshowsquare.py"])
+            subprocess.Popen([sys.executable, os.path.join(script_dir, "nfshowsquare.py")])
             self.status_var.set("Square display started")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to start square display: {str(e)}")
@@ -73,8 +75,9 @@ class NeurofeedbackGUI:
         if not subject:
             messagebox.showwarning("Warning", "Please enter a subject code")
             return
+        script_dir = os.path.dirname(os.path.abspath(__file__))
         try:
-            subprocess.Popen([sys.executable, "nfrun.py", "-m", "calib", "-s", subject])
+            subprocess.Popen([sys.executable, os.path.join(script_dir, "nfrun.py"), "-m", "calib", "-s", subject])
             self.status_var.set(f"Training started for subject {subject}")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to start training: {str(e)}")
@@ -84,8 +87,9 @@ class NeurofeedbackGUI:
         if not subject:
             messagebox.showwarning("Warning", "Please enter a subject code")
             return
+        script_dir = os.path.dirname(os.path.abspath(__file__))
         try:
-            subprocess.Popen([sys.executable, "nfrun.py", "-m", "nf", "-s", subject])
+            subprocess.Popen([sys.executable, os.path.join(script_dir, "nfrun.py"), "-m", "nf", "-s", subject])
             self.status_var.set(f"Neurofeedback started for subject {subject}")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to start neurofeedback: {str(e)}")
